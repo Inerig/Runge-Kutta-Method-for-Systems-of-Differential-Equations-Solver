@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Runge-Kutta Method for Systems of Differential Equations Solver</title>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1 style="text-align: center;">Runge-Kutta Method for Systems of Differential Equations Solver</h1>
+    <div class="form-group">
+        <label for="functionInput">Enter your function (e.g., "t - y", "Math.exp(t) - y", "Math.log(y)"): </label>
+        <div class="input-container">
+            <input type="text" id="functionInput" placeholder="t - y" class="function-input" oninput="adjustWidth(this)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="a">Left endpoint (a): </label>
+        <div class="input-container">
+            <input type="number" id="a" value="0" oninput="adjustWidth(this)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="b">Right endpoint (b): </label>
+        <div class="input-container">
+            <input type="number" id="b" value="1" oninput="adjustWidth(this)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="n">Number of steps (n): </label>
+        <div class="input-container">
+            <input type="number" id="n" value="10" oninput="adjustWidth(this)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="alpha">Initial condition (α): </label>
+        <div class="input-container">
+            <input type="number" id="alpha" value="1" oninput="adjustWidth(this)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="decimalPlaces">Decimal places: </label>
+        <div class="input-container">
+            <input type="number" id="decimalPlaces" value="4" oninput="adjustWidth(this)">
+        </div>
+    </div>
+    <button onclick="solveAndDisplay()">Solve</button>
+    <div class="calculations">
+        <h2>Runge-Kutta Method Calculations:</h2>
+        <div id="rkCalculationsContent"></div>
+    </div>
+    <table id="rkResultTable">
+        <thead>
+            <tr>
+                <th>Step</th>
+                <th>t</th>
+                <th>ω₁</th>
+                <th>ω₂</th>
+                <!-- Add more columns for additional equations -->
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div class="instructions">
+        <p>Instructions:</p>
+        <ul>
+            <li>Use `t` for the independent variable (time).</li>
+            <li>Use `y1`, `y2`, etc., for the dependent variables (the functions you're solving for).</li>
+            <li>Use `Math` for mathematical functions (e.g., `Math.exp`, `Math.log`, `Math.sin`).</li>
+            <li>Avoid using spaces between operators and numbers or variables.</li>
+        </ul>
+    </div>
+    <div class="example">
+        <p>Examples:</p>
+        <ul>
+            <li><strong>Linear System:</strong> \( y'_1 = t - y_1 \), \( y'_2 = y_1 - y_2 \) → <code>{ t - y1, y1 - y2 }</code></li>
+            <li><strong>Exponential System:</strong> \( y'_1 = e^{t} - y_1 \), \( y'_2 = e^{t} - y_2 \) → <code>{ Math.exp(t) - y1, Math.exp(t) - y2 }</code></li>
+            <li><strong>Logarithmic System:</strong> \( y'_1 = \ln(y_1) \), \( y'_2 = \ln(y_2) \) → <code>{ Math.log(y1), Math.log(y2) }</code></li>
+            <li><strong>Trigonometric System:</strong> \( y'_1 = \sin(t) + \cos(y_1) \), \( y'_2 = \sin(t) + \cos(y_2) \) → <code>{ Math.sin(t) + Math.cos(y1), Math.sin(t) + Math.cos(y2) }</code></li>
+            <li><strong>Hyperbolic System:</strong> \( y'_1 = \sinh(t) - \cosh(y_1) \), \( y'_2 = \sinh(t) - \cosh(y_2) \) → <code>{ Math.sinh(t) - Math.cosh(y1), Math.sinh(t) - Math.cosh(y2) }</code></li>
+            <li><strong>Power System:</strong> \( y'_1 = t^2 + y_1^3 \), \( y'_2 = t^2 + y_2^3 \) → <code>{ Math.pow(t, 2) + Math.pow(y1, 3), Math.pow(t, 2) + Math.pow(y2, 3) }</code></li>
+            <li><strong>Rational System:</strong> \( y'_1 = \frac{t}{y_1} \), \( y'_2 = \frac{t}{y_2} \) → <code>{ t / y1, t / y2 }</code></li>
+            <li><strong>Piecewise System:</strong> \( y'_1 = 
+                \begin{cases} 
+                    t & \text{if } t < 0 \\
+                    y_1 & \text{otherwise}
+                \end{cases}, \quad y'_2 = 
+                \begin{cases} 
+                    t & \text{if } t < 0 \\
+                    y_2 & \text{otherwise}
+                \end{cases} \) → <code>{ (t < 0) ? t : y1, (t < 0) ? t : y2 }</code></li>
+        </ul>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
